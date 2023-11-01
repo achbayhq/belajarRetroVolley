@@ -56,4 +56,33 @@ public class volleyRequestHandler {
         void onError(String error);
     }
 
+    public void loginUser(final String email, final String password, final ResponseListener listener) {
+        String url = "http://192.168.0.110/WSRetrovolley-master/Login.php?email=" + email + "&password=" + password; // Ganti dengan URL server PHP Anda.
+
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("email", email);
+            jsonObject.put("password", password);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        // Response sukses dari server
+                        listener.onResponse(response);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // Response error dari server
+                        listener.onError(error.getMessage());
+                    }
+                });
+
+        requestQueue.add(request);
+    }
 }

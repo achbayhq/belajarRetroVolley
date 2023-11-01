@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
     private EditText etNama, etEmail, etPass;
     private Button btnRegister;
-    private String URL = "http://192.168.111.127/belajarRetroVolley/register.php";
+    private String URL = "http://192.168.0.110/WSRetrovolley-master/User_Registration.php";
     private String nama, email, pass;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     int code = response.getInt("code");
                     if (code == 201){
-                        Intent intent = new Intent(MainActivity.this, DasActivity.class);
+                        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                         startActivity(intent);
                         finish();
                     } else if (code == 405) {
